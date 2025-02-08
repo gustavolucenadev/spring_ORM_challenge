@@ -11,11 +11,12 @@ public class Bloco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column()
     private Date inicio;
     private Date fim;
 
     @ManyToOne
-    @JoinColumn(name = "id_bloco")
+    @JoinColumn(name = "id_atividade")
     private Atividade atividade;
 
     public Bloco(Integer id, Date inicio, Date fim, Atividade atividade) {

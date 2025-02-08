@@ -15,7 +15,8 @@ public class Participante {
     private String nome;
     private String email;
 
-    @ManyToMany(mappedBy = "participantes")
+    @ManyToMany
+    @JoinTable(name="tb_participante_atividade", joinColumns = @JoinColumn(name="id_participante"), inverseJoinColumns = @JoinColumn(name="id_atividade"))
     private Set<Atividade> atividades = new HashSet<>();
 
     public Integer getId() {

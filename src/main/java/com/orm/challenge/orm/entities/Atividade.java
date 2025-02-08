@@ -20,9 +20,7 @@ public class Atividade {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    @ManyToMany
-    @JoinTable(name="tb_participantes_atividade",
-            joinColumns = @JoinColumn(name = "id_atividade"), inverseJoinColumns = @JoinColumn(name = "id_participante"))
+    @ManyToMany(mappedBy = "atividades")
     private Set<Participante> participantes = new HashSet<>();
 
     @OneToMany(mappedBy = "atividade")
