@@ -3,6 +3,7 @@ package com.orm.challenge.orm.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -23,6 +24,9 @@ public class Atividade {
     @JoinTable(name="tb_participantes_atividade",
             joinColumns = @JoinColumn(name = "id_atividade"), inverseJoinColumns = @JoinColumn(name = "id_participante"))
     private Set<Participante> participantes = new HashSet<>();
+
+    @OneToMany(mappedBy = "atividade")
+    private Set<Bloco> blocos = new HashSet<>();
 
     public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria) {
         this.id = id;
@@ -74,5 +78,23 @@ public class Atividade {
 
     public Set<Participante> getParticipantes() {
         return participantes;
+    }
+
+    public Set<Bloco> getBlocos() {
+        return blocos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Atividade atividade = (Atividade) o;
+        return Objects.equals(id, atividade.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
